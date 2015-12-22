@@ -1,87 +1,87 @@
 
 import UIKit
 
-@objc protocol CarProtocol {
-    optional var name: String{get}
-    optional var speed: Float{get}
-    optional var price: Float{get}
-    
-    optional func printMe()
-    optional func descriptionMe() -> String
-}
-
-extension CarProtocol {
-    func printMe() {
-        print("The car's name is \(self.name), speed is \(String(self.speed)) km/s and price is \(String(self.price)) thousand dollar")
-    }
-    
-    func descriptionMe() -> String {
-        return "The car's name is \(self.name), speed is \(String(self.speed)) km/s and price is \(String(self.price)) thousand dollar"
-    }
-}
-
-class Benz: CarProtocol {
-    
-    @objc var name: String{
-        return "Mercedes-Benz"
-    }
-    
-    @objc var speed: Float{
-        return 100.0
-    }
-    
-    @objc var price: Float{
-        return 100
-    }
-}
-
-class Bmw: CarProtocol {
-    
-    @objc var name: String{
-        return "BMW"
-    }
-    
-    @objc var speed: Float{
-        return 120.0
-    }
-    
-    @objc var price: Float{
-        return 130
-    }
-}
-
-class RichMan {
-    var moneyCount: String
-    var car: CarProtocol            //protocol is type
-    
-    init(moneyCount: String, car: CarProtocol){
-        self.moneyCount = moneyCount
-        self.car = car
-    }
-}
-
-protocol TextFormator {
-    func textFormat() -> String?
-}
-
-extension RichMan: TextFormator {
-    func textFormat() -> String? {
-        return self.car.name
-    }
-}
-
-extension CollectionType where Generator.Element: TextFormator {
-    func printFormateElements() -> String {
-        let itemsAsText: [String] = self.map { $0.textFormat()! }//此处必须定义itemsAsText的类型为[String],否则下一句无法执行
-        return "[" + itemsAsText.joinWithSeparator("、") + "]"
-    }
-}
-
-var benzRich: RichMan = RichMan(moneyCount: "just a number", car: Benz())
-var bmwRich: RichMan = RichMan(moneyCount: "10 billion", car: Bmw())
-
-let richMans = [benzRich,bmwRich]
-print(richMans.printFormateElements())
+//@objc protocol CarProtocol {
+//    optional var name: String{get}
+//    optional var speed: Float{get}
+//    optional var price: Float{get}
+//    
+//    optional func printMe()
+//    optional func descriptionMe() -> String
+//}
+//
+//extension CarProtocol {
+//    func printMe() {
+//        print("The car's name is \(self.name), speed is \(String(self.speed)) km/s and price is \(String(self.price)) thousand dollar")
+//    }
+//    
+//    func descriptionMe() -> String {
+//        return "The car's name is \(self.name), speed is \(String(self.speed)) km/s and price is \(String(self.price)) thousand dollar"
+//    }
+//}
+//
+//class Benz: CarProtocol {
+//    
+//    @objc var name: String{
+//        return "Mercedes-Benz"
+//    }
+//    
+//    @objc var speed: Float{
+//        return 100.0
+//    }
+//    
+//    @objc var price: Float{
+//        return 100
+//    }
+//}
+//
+//class Bmw: CarProtocol {
+//    
+//    @objc var name: String{
+//        return "BMW"
+//    }
+//    
+//    @objc var speed: Float{
+//        return 120.0
+//    }
+//    
+//    @objc var price: Float{
+//        return 130
+//    }
+//}
+//
+//class RichMan {
+//    var moneyCount: String
+//    var car: CarProtocol            //protocol is type
+//    
+//    init(moneyCount: String, car: CarProtocol){
+//        self.moneyCount = moneyCount
+//        self.car = car
+//    }
+//}
+//
+//protocol TextFormator {
+//    func textFormat() -> String?
+//}
+//
+//extension RichMan: TextFormator {
+//    func textFormat() -> String? {
+//        return self.car.name
+//    }
+//}
+//
+//extension CollectionType where Generator.Element: TextFormator {
+//    func printFormateElements() -> String {
+//        let itemsAsText: [String] = self.map { $0.textFormat()! }//此处必须定义itemsAsText的类型为[String],否则下一句无法执行
+//        return "[" + itemsAsText.joinWithSeparator("、") + "]"
+//    }
+//}
+//
+//var benzRich: RichMan = RichMan(moneyCount: "just a number", car: Benz())
+//var bmwRich: RichMan = RichMan(moneyCount: "10 billion", car: Bmw())
+//
+//let richMans = [benzRich,bmwRich]
+//print(richMans.printFormateElements())
 
 
 /**
@@ -240,4 +240,27 @@ print(richMans.printFormateElements())
 //game.play()
 //
 //print("Here is a random boolean value:\(game.dice.generator.randomBool())")
+
+struct SomeStruct {
+    var name: String
+    var age: Int
+}
+
+let instanceStruct = SomeStruct(name: "Boy", age: 11)
+var anotherInstance = instanceStruct
+anotherInstance.age = 12
+
+print(instanceStruct.name + String(instanceStruct.age))
+
+class SomeClass {
+    var name: String?
+    var age: Int = 11
+}
+
+let instanceClass = SomeClass()
+instanceClass.name = "Tom"
+var anotherClassIns = instanceClass
+anotherClassIns.name = "Bill"
+print(instanceClass.name)
+
 
